@@ -9,5 +9,6 @@ namespace LibraryManagement.Models
         public DateOnly ReturnDate { get; set; }
         public int? BookId { get; set; }
         public int? MemberId { get; set; }
+        public bool? isReturned { get; set; } = false;
     }
 }

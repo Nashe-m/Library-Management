@@ -85,6 +85,27 @@ namespace LibraryManagement.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> BookReturn(int id)
+        {
+            try
+            {
+                var borrowing = await borrowingRepository.ReturnBook(id);
+                if (borrowing is null) return NotFound("Borrowing Not Found");
+                return Ok(borrowing);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong in {nameof(BookReturn)}:{ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+
+        }
+
         // POST: api/Borrowing
         [Authorize]
         [HttpPost]

@@ -50,5 +50,13 @@ namespace LibraryManagement.Repository
             return entity;
 
         }
+        public async Task<Borrowing?> ReturnBook(int id)
+        {
+            var borrowing = await context.Borrowings.FindAsync(id);
+            if (borrowing is null) return null;
+            borrowing.isReturned = true;
+            await context.SaveChangesAsync();
+            return borrowing;
+        }
     }
 }
