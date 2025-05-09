@@ -147,7 +147,7 @@ namespace LibraryManagement.Controllers
             catch (Exception ex)
             {
                 logger.LogError($"Something went wrong in the {nameof(DeleteBorrowing)}:{ex.Message}");
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, "Internal Server Error");
             }
         }
     }
